@@ -21,7 +21,19 @@ const userService = {
 
   criarUsuario: async (usuario) => {
     try {
-      const response = await api.post('/users', usuario);
+      // Remover campos vazios ou undefined
+      const dadosParaEnviar = Object.entries(usuario).reduce((acc, [key, value]) => {
+        if (value !== '' && value !== undefined && value !== null) {
+          if (key === 'sistemas') {
+            acc[key] = value.map(s => s.id);
+          } else {
+            acc[key] = value;
+          }
+        }
+        return acc;
+      }, {});
+
+      const response = await api.post('/users', dadosParaEnviar);
       return response.data;
     } catch (error) {
       throw error;
@@ -30,7 +42,22 @@ const userService = {
 
   atualizarUsuario: async (id, usuario) => {
     try {
-      const response = await api.put(`/users/${id}`, usuario);
+      // Remover campos vazios ou undefined
+      const dadosParaEnviar = Object.entries(usuario).reduce((acc, [key, value]) => {
+        if (key === 'senha' && !value) {
+          return acc; // Não envia senha se estiver vazia
+        }
+        if (value !== '' && value !== undefined && value !== null) {
+          if (key === 'sistemas') {
+            acc[key] = value.map(s => s.id);
+          } else {
+            acc[key] = value;
+          }
+        }
+        return acc;
+      }, {});
+
+      const response = await api.put(`/users/${id}`, dadosParaEnviar);
       return response.data;
     } catch (error) {
       throw error;

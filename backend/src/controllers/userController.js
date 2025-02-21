@@ -12,7 +12,17 @@ const userController = {
       console.log('[USERS] Headers:', req.headers);
       
       const users = await User.findAll({
-        attributes: { exclude: ['senha', 'createdAt', 'updatedAt'] },
+        attributes: [
+          'id',
+          'nome',
+          'email',
+          'cpf',
+          'telefone',
+          'cargo',
+          'departamento',
+          'observacoes',
+          'ativo'
+        ],
         include: [{
           model: Sistema,
           as: 'sistemas',
@@ -20,7 +30,8 @@ const userController = {
         }],
         order: [['nome', 'ASC']]
       });
-      
+
+      console.log('[USERS] Dados retornados:', JSON.stringify(users, null, 2));
       console.log('[USERS] Total de usuários encontrados:', users.length);
       console.log('[USERS] ====== FIM DA LISTAGEM - SUCESSO ======\n');
       
@@ -47,11 +58,14 @@ const userController = {
       console.log('[USERS] Headers:', req.headers);
       
       const user = await User.findByPk(req.params.id, {
-        attributes: { exclude: ['senha', 'createdAt', 'updatedAt'] },
+        attributes: { 
+          exclude: ['senha'] // Mantém todos os campos exceto senha
+        },
         include: [{
           model: Sistema,
           as: 'sistemas',
-          through: { attributes: [] }
+          through: { attributes: [] },
+          attributes: ['id', 'nome']
         }]
       });
       
@@ -194,13 +208,24 @@ const userController = {
       console.log('\n[USERS] ====== INÍCIO DA EXCLUSÃO ======');
       console.log('[USERS] ID:', req.params.id);
       
-      const user = await User.findByPk(req.params.id);
+      const user = await User.findByPk(req.params.id, { transaction });
       
       if (!user) {
-        await transaction.rollback();
         console.log('[USERS] Usuário não encontrado');
         console.log('[USERS] ====== FIM DA EXCLUSÃO - NÃO ENCONTRADO ======\n');
+        await transaction.rollback();
         return res.status(404).json({ error: 'Usuário não encontrado' });
+      }
+
+      // Verificar se existem associações com Admin
+      const admin = await Admin.findOne({ 
+        where: { userId: req.params.id },
+        transaction 
+      });
+
+      if (admin) {
+        // Se for admin, primeiro remover o registro da tabela Admin
+        await admin.destroy({ transaction });
       }
 
       // Remover todas as associações com sistemas

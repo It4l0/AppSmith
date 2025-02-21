@@ -76,7 +76,8 @@ function ListaUsuarios() {
   const fetchUsuarios = async () => {
     try {
       setLoading(true);
-      const response = await userService.listUsers();
+      const response = await userService.listarUsuarios();
+      console.log('Dados dos usuários:', response); // Debug
       setUsuarios(response);
     } catch (error) {
       console.error('Erro ao buscar usuários:', error);
@@ -101,7 +102,7 @@ function ListaUsuarios() {
   const handleDeletarUsuario = async (id) => {
     if (window.confirm('Tem certeza que deseja excluir este usuário?')) {
       try {
-        await userService.deleteUser(id);
+        await userService.excluirUsuario(id);
         setSnackbar({
           open: true,
           message: 'Usuário excluído com sucesso',

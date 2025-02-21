@@ -10,18 +10,47 @@ const User = sequelize.define('User', {
   },
   nome: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   },
   email: {
     type: DataTypes.STRING,
     allowNull: false,
     unique: true,
     validate: {
-      isEmail: true
+      isEmail: true,
+      notEmpty: true
     }
   },
   senha: {
     type: DataTypes.STRING,
+    allowNull: false
+  },
+  telefone: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  cargo: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  departamento: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  cpf: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+    validate: {
+      len: [11, 11],
+      is: /^\d{11}$/
+    }
+  },
+  observacoes: {
+    type: DataTypes.TEXT,
     allowNull: true
   },
   ativo: {
@@ -38,12 +67,18 @@ const User = sequelize.define('User', {
         console.log('[USER] Criptografando senha');
         user.senha = await bcrypt.hash(user.senha, 10);
       }
+      if (user.cpf) {
+        user.cpf = user.cpf.replace(/\D/g, '');
+      }
     },
     beforeUpdate: async (user) => {
       console.log('[USER] Atualizando usuário');
       if (user.changed('senha')) {
         console.log('[USER] Senha modificada, criptografando nova senha');
         user.senha = await bcrypt.hash(user.senha, 10);
+      }
+      if (user.changed('cpf')) {
+        user.cpf = user.cpf.replace(/\D/g, '');
       }
     }
   }
