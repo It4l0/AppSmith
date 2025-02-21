@@ -1,0 +1,30 @@
+.card {
+  height: 100%;
+  padding: 24px;
+  border-radius: 12px !important;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.cardContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardInfo {
+  flex: 1;
+}
+
+.cardIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  margin-left: 16px;
+}
