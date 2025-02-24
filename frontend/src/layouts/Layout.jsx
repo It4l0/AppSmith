@@ -31,6 +31,8 @@ import {
 import { styled } from '@mui/material/styles';
 import { useTheme as useMuiTheme } from '@mui/material/styles';
 import { useTheme as useAppTheme } from '../contexts/ThemeContext';
+import { BarChart as ReportsIcon } from '@mui/icons-material';
+
 
 const drawerWidth = 240;
 
@@ -114,22 +116,7 @@ const Layout = () => {
             <IconButton color="inherit" onClick={toggleTheme}>
               {isDarkMode ? <LightModeIcon /> : <DarkModeIcon />}
             </IconButton>
-          </Tooltip>
-          <IconButton
-            color="inherit"
-            onClick={handleSettingsClick}
-          >
-            <SettingsIcon />
-          </IconButton>
-          <Menu
-            anchorEl={settingsAnchorEl}
-            open={Boolean(settingsAnchorEl)}
-            onClose={handleSettingsClose}
-          >
-            <MenuItem onClick={handleSettingsClose}>
-              Configurações
-            </MenuItem>
-          </Menu>
+          </Tooltip>          
         </Toolbar>
       </AppBarStyled>
       <Drawer
@@ -170,7 +157,18 @@ const Layout = () => {
             </ListItemIcon>
             <ListItemText primary="Usuários" />
           </ListItem>
+          <ListItem button onClick={() => navigate('/configuracoes')}>
+  <ListItemIcon>
+    <SettingsIcon />
+  </ListItemIcon>
+  <ListItemText primary="Configurações" />
+</ListItem>
+
+
+          
+
         </List>
+        <Divider />
       </Drawer>
       <Main open={open}>
         <Box sx={{ height: theme.spacing(8) }} /> {/* Espaço para a AppBar */}

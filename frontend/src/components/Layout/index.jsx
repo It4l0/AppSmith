@@ -7,13 +7,12 @@ import {
   Drawer,
   IconButton,
   List,
-  ListItem,
+  ListItemButton,
   ListItemIcon,
   ListItemText,
   Toolbar,
   Typography,
-  Button,
-  ListItemButton
+  Button
 } from '@mui/material';
 import {
   Menu as MenuIcon,
@@ -36,8 +35,9 @@ const Layout = ({ children }) => {
     setMobileOpen(!mobileOpen);
   };
 
+
+
   const handleNavigation = (path) => {
-    console.log('Navegando para:', path);
     navigate(path);
     setMobileOpen(false);
   };
@@ -117,47 +117,8 @@ const Layout = ({ children }) => {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-          }}
-        >
-          {drawer}
-        </Drawer>
-        <Drawer
-          variant="permanent"
-          sx={{
-            display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-          }}
-          open
-        >
-          {drawer}
-        </Drawer>
-      </Box>
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: 3,
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          mt: '64px'
-        }}
-      >
-        {children}
-      </Box>
-    </Box>
-  );
-};
-
-export default Layout;
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+  
+            keepMounted: true, // Melhor desempenho em dispositivos móveis
           }}
           sx={{
             display: { xs: 'block', sm: 'none' },

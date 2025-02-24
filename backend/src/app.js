@@ -5,6 +5,7 @@ const sequelize = require('./config/database');
 const routes = require('./routes');
 const LogService = require('./services/logService');
 
+
 // Load environment variables
 dotenv.config();
 

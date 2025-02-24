@@ -9,6 +9,7 @@ import CadastroUsuario from '../pages/usuarios/CadastroUsuario';
 import ListaSistemas from '../pages/sistemas/ListaSistemas';
 import CadastroSistema from '../pages/sistemas/CadastroSistema';
 import Loading from '../components/Loading/Loading';
+import Configuracoes from '../pages/Configuracoes';
 
 // Componente para proteger rotas
 const PrivateRoute = ({ children }) => {

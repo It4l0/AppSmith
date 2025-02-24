@@ -43,11 +43,11 @@ const User = sequelize.define('User', {
   cpf: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
-    validate: {
-      len: [11, 11],
-      is: /^\d{11}$/
-    }
+    unique: false,
+    //validate: {
+     // len: [11, 11],
+    //  is: /^\d{3}\.\d{3}\.\d{3}-\d{2}$/
+   // }
   },
   observacoes: {
     type: DataTypes.TEXT,
@@ -55,7 +55,7 @@ const User = sequelize.define('User', {
   },
   ativo: {
     type: DataTypes.BOOLEAN,
-    defaultValue: true
+    defaultValue: false
   }
 }, {
   timestamps: true,

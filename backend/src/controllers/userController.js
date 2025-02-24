@@ -65,7 +65,7 @@ const userController = {
           model: Sistema,
           as: 'sistemas',
           through: { attributes: [] },
-          attributes: ['id', 'nome']
+          attributes: ['id', 'nome','cpf','telefone','cargo','departamento','observacoes','status']
         }]
       });
       
@@ -302,9 +302,9 @@ const userController = {
 
       // Criar admin com os dados do usuário
       const admin = await Admin.create({
-        nome: req.body.nome || user.nome,
-        email: req.body.email || user.email,
-        senha: req.body.senha || user.senha,
+      nome: req.body.nome || user.nome,
+      email: req.body.email || user.email,
+      senha: req.body.senha || user.senha,
         ativo: req.body.ativo !== undefined ? req.body.ativo : user.ativo
       }, { transaction });
 

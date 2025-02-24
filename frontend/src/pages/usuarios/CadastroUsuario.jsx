@@ -30,8 +30,11 @@ const CadastroUsuario = () => {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
   const [loading, setLoading] = useState(false);
+
+
+
+
   const [sistemasDisponiveis, setSistemasDisponiveis] = useState([]);
-  const [sistemasSelecionados, setSistemasSelecionados] = useState([]);
 
   // Estado do formulário
   const [formData, setFormData] = useState({
@@ -43,7 +46,9 @@ const CadastroUsuario = () => {
     departamento: '',
     cpf: '',
     observacoes: '',
-    ativo: true,
+
+
+    ativo: false, // Garantir que o valor inicial seja booleano
     sistemas: []
   });
 
@@ -89,20 +94,17 @@ const CadastroUsuario = () => {
         departamento: data.departamento || '',
         cpf: data.cpf || '',
         observacoes: data.observacoes || '',
-        ativo: data.ativo,
+
+
+        ativo: data.ativo || false, // Garantir que seja booleano
         sistemas: data.sistemas || []
       });
       
       // Guarda o estado original para comparação
       setItemOriginal({
-        nome: data.nome,
-        email: data.email,
-        telefone: data.telefone || '',
-        cargo: data.cargo || '',
-        departamento: data.departamento || '',
-        cpf: data.cpf || '',
-        observacoes: data.observacoes || '',
-        ativo: data.ativo,
+        ...data,
+
+          ativo: data.ativo || false, // Garantir que seja booleano
         sistemas: data.sistemas || []
       });
 
@@ -352,7 +354,8 @@ const CadastroUsuario = () => {
               <FormControlLabel
                 control={
                   <Switch
-                    checked={formData.ativo}
+
+                  checked={!!formData.ativo} // Garantir que seja booleano
                     onChange={handleInputChange}
                     name="ativo"
                     disabled={loading}
@@ -486,5 +489,7 @@ const CadastroUsuario = () => {
     </Box>
   );
 };
+
+
 
 export default CadastroUsuario;

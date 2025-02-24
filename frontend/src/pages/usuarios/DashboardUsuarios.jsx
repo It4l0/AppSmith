@@ -163,7 +163,7 @@ const DashboardUsuarios = () => {
                   <TableRow>
                     <TableCell>Nome</TableCell>
                     <TableCell>Email</TableCell>
-                    <TableCell>Status</TableCell>
+                    <TableCell>Status</TableCell>                    
                     <TableCell align="right">Ações</TableCell>
                   </TableRow>
                 </TableHead>

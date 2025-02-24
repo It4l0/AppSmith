@@ -12,6 +12,8 @@ import ListaSistemas from './pages/sistemas/ListaSistemas';
 import CadastroSistema from './pages/sistemas/CadastroSistema';
 import DashboardUsuarios from './pages/usuarios/DashboardUsuarios';
 import CadastroUsuario from './pages/usuarios/CadastroUsuario';
+import Configuracoes from './pages/Configuracoes';
+
 
 function App() {
   return (
@@ -27,7 +29,9 @@ function App() {
             <Route path="usuarios" element={<DashboardUsuarios />} />
             <Route path="usuarios/novo" element={<CadastroUsuario />} />
             <Route path="usuarios/editar/:id" element={<CadastroUsuario />} />
+            <Route path="/configuracoes" element={<Configuracoes />} />
             <Route path="*" element={<Dashboard />} />
+           
           </Route>
         </Routes>
       </Router>
