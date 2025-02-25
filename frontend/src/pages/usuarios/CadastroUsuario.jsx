@@ -31,9 +31,6 @@ const CadastroUsuario = () => {
   const { enqueueSnackbar } = useSnackbar();
   const [loading, setLoading] = useState(false);
 
-
-
-
   const [sistemasDisponiveis, setSistemasDisponiveis] = useState([]);
 
   // Estado do formulário
@@ -45,9 +42,6 @@ const CadastroUsuario = () => {
     cargo: '',
     departamento: '',
     cpf: '',
-    observacoes: '',
-
-
     ativo: false, // Garantir que o valor inicial seja booleano
     sistemas: []
   });
@@ -93,9 +87,6 @@ const CadastroUsuario = () => {
         cargo: data.cargo || '',
         departamento: data.departamento || '',
         cpf: data.cpf || '',
-        observacoes: data.observacoes || '',
-
-
         ativo: data.ativo || false, // Garantir que seja booleano
         sistemas: data.sistemas || []
       });
@@ -103,8 +94,7 @@ const CadastroUsuario = () => {
       // Guarda o estado original para comparação
       setItemOriginal({
         ...data,
-
-          ativo: data.ativo || false, // Garantir que seja booleano
+        ativo: data.ativo || false, // Garantir que seja booleano
         sistemas: data.sistemas || []
       });
 
@@ -126,8 +116,7 @@ const CadastroUsuario = () => {
       { key: 'telefone', label: 'Telefone' },
       { key: 'cargo', label: 'Cargo' },
       { key: 'departamento', label: 'Departamento' },
-      { key: 'cpf', label: 'CPF' },
-      { key: 'observacoes', label: 'Observações' }
+      { key: 'cpf', label: 'CPF' }
     ];
 
     campos.forEach(({ key, label }) => {
@@ -338,24 +327,10 @@ const CadastroUsuario = () => {
             </Grid>
 
             <Grid item xs={12}>
-              <TextField
-                fullWidth
-                label="Observações"
-                name="observacoes"
-                value={formData.observacoes}
-                onChange={handleInputChange}
-                disabled={loading}
-                multiline
-                rows={4}
-              />
-            </Grid>
-
-            <Grid item xs={12}>
               <FormControlLabel
                 control={
                   <Switch
-
-                  checked={!!formData.ativo} // Garantir que seja booleano
+                    checked={!!formData.ativo} // Garantir que seja booleano
                     onChange={handleInputChange}
                     name="ativo"
                     disabled={loading}
@@ -489,7 +464,5 @@ const CadastroUsuario = () => {
     </Box>
   );
 };
-
-
 
 export default CadastroUsuario;
