@@ -6,7 +6,7 @@ exports.listarUsuarios = async (req, res) => {
   try {
     console.log('[USUARIOS] Iniciando listagem de usuários');
     const usuarios = await User.findAll({
-      attributes: ['id', 'nome', 'email', 'ativo', 'cpf','telefone','cargo', 'createdAt', 'updatedAt'],
+      attributes: ['id', 'nome', 'email', 'ativo', 'cpf','telefone','cargo','departamento','observacoes', 'createdAt', 'updatedAt'],
       order: [['nome', 'ASC']]
     });
     
@@ -20,7 +20,10 @@ exports.listarUsuarios = async (req, res) => {
       email: usuario.email,
       cpf: usuario.cpf, // Adicionando o campo CPF na resposta
       telefone: usuario.telefone,
+      departamento: usuario.departamento,
+      observacoes: usuario.observacoes,
       status: usuario.ativo ? 'ativo' : 'inativo',
+
       cargo: usuario.cargo,
       createdAt: usuario.createdAt,
       updatedAt: usuario.updatedAt
@@ -41,7 +44,7 @@ exports.buscarUsuarioPorId = async (req, res) => {
   try {
     console.log(`[USUARIOS] Buscando usuário por ID: ${req.params.id}`);
     const usuario = await User.findByPk(req.params.id, {
-      attributes: ['id', 'nome', 'email', 'ativo', 'cpf','telefone','cargo', 'createdAt', 'updatedAt']
+      attributes: ['id', 'nome', 'email', 'ativo', 'cpf','telefone','cargo','departamento','observacoes', 'createdAt', 'updatedAt']
     });
     
     if (!usuario) {
@@ -61,6 +64,8 @@ exports.buscarUsuarioPorId = async (req, res) => {
       telefone: usuario.telefone,
       cargo: usuario.cargo,
       status: usuario.ativo ? 'ativo' : 'inativo',
+      departamento: usuario.departamento,
+      observacoes  : usuario.observacoes,
       createdAt: usuario.createdAt,
       updatedAt: usuario.updatedAt
     });
@@ -92,6 +97,8 @@ exports.criarUsuario = async (req, res) => {
       telefone: usuario.telefone,
       cargo: usuario.cargo,
       status: usuario.ativo ? 'ativo' : 'inativo',
+      departamento: usuario.departamento,
+      observacoes  : usuario.observacoes,
       createdAt: usuario.createdAt,
       updatedAt: usuario.updatedAt
     });
@@ -131,6 +138,8 @@ exports.atualizarUsuario = async (req, res) => {
       cpf: usuario.cpf, // Adicionando o campo CPF na resposta
       telefone: usuario.telefone,
       status: usuario.ativo ? 'ativo' : 'inativo',
+      departamento: usuario.departamento,
+      observacoes  : usuario.observacoes,
       createdAt: usuario.createdAt,
       updatedAt: usuario.updatedAt
     });

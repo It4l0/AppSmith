@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
-import Dashboard from "./pages/Dashboard/Dashboard";
+import Login from "./pages/Login/Login"; 
 import Users from "./pages/Users";
 import Configuracoes from "./pages/Configuracoes";
 
@@ -10,7 +10,7 @@ const AppRoutes = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Dashboard />} />
+          <Route index element={<Login />} />
           <Route path="users" element={<Users />} />
           <Route path="/configuracoes" element={<Configuracoes />} />
         </Route>

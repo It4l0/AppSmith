@@ -13,6 +13,9 @@ import CadastroSistema from './pages/sistemas/CadastroSistema';
 import DashboardUsuarios from './pages/usuarios/DashboardUsuarios';
 import CadastroUsuario from './pages/usuarios/CadastroUsuario';
 import Configuracoes from './pages/Configuracoes';
+import Login from './pages/Login/Login';
+
+
 
 
 function App() {
@@ -20,9 +23,10 @@ function App() {
     <ThemeProvider>
       <CssBaseline />
       <Router>
-        <Routes>
+        <Routes>                   
           <Route path="/" element={<Layout />}>
-            <Route index element={<Dashboard />} />
+          <Route index element={<Dashboard />} />
+          <Route path="login" element={<Login />} />
             <Route path="sistemas" element={<ListaSistemas />} />
             <Route path="sistemas/novo" element={<CadastroSistema />} />
             <Route path="sistemas/editar/:id" element={<CadastroSistema />} />
@@ -30,8 +34,7 @@ function App() {
             <Route path="usuarios/novo" element={<CadastroUsuario />} />
             <Route path="usuarios/editar/:id" element={<CadastroUsuario />} />
             <Route path="/configuracoes" element={<Configuracoes />} />
-            <Route path="*" element={<Dashboard />} />
-           
+            <Route path="*" element={<Dashboard />} />           
           </Route>
         </Routes>
       </Router>

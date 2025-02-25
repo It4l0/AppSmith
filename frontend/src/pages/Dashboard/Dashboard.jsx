@@ -25,7 +25,7 @@ import {
   ResponsiveContainer
 } from 'recharts';
 import styles from './Dashboard.module.css';
-import api from '../../services/api';
+import api from '../src/services/api';
 
 // Dados de exemplo para o gráfico
 const data = [
@@ -101,7 +101,7 @@ const Dashboard = () => {
         {/* Cards informativos */}
         <Grid item xs={12} sm={6} md={3}>
           <DashboardCard
-            title="Usuários"
+            title="Usuários Cadastrados"
             value={userCount}
             icon={PeopleIcon}
             color={theme.palette.primary.main}
@@ -132,8 +132,16 @@ const Dashboard = () => {
             color="#ed6c02"
           />
         </Grid>
-
-        {/* Gráfico */}
+        <Grid item xs={12} sm={6} md={3}>
+          <StatusCard
+            title="Usuarios"
+            value={stats.users}
+            icon={<PersonIcon />}
+            color="primary.main"
+          />
+        </Grid>
+        
+         {/* Gráfico */}
         <Grid item xs={12}>
           <Paper sx={{ p: 2 }}>
             <Typography variant="h6" gutterBottom>
