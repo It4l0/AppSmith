@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from './contexts/ThemeContext';
+import { AuthProvider } from './contexts/AuthContext';
 
 // Layouts
 import Layout from './layouts/Layout';
@@ -20,25 +21,27 @@ import Login from './pages/Login/Login';
 
 function App() {
   return (
-    <ThemeProvider>
-      <CssBaseline />
-      <Router>
-        <Routes>                   
-          <Route path="/" element={<Layout />}>
-          <Route index element={<Dashboard />} />
-          <Route path="login" element={<Login />} />
-            <Route path="sistemas" element={<ListaSistemas />} />
-            <Route path="sistemas/novo" element={<CadastroSistema />} />
-            <Route path="sistemas/editar/:id" element={<CadastroSistema />} />
-            <Route path="usuarios" element={<DashboardUsuarios />} />
-            <Route path="usuarios/novo" element={<CadastroUsuario />} />
-            <Route path="usuarios/editar/:id" element={<CadastroUsuario />} />
-            <Route path="/configuracoes" element={<Configuracoes />} />
-            <Route path="*" element={<Dashboard />} />           
-          </Route>
-        </Routes>
-      </Router>
-    </ThemeProvider>
+    <AuthProvider>
+      <ThemeProvider>
+        <CssBaseline />
+        <Router>
+          <Routes>                   
+            <Route path="/" element={<Layout />}> (MUDAR PARA LOGIN)
+            <Route index element={<Login />} /> (mudar para login)
+            <Route path="dashboard" element={<Dashboard />} />
+              <Route path="sistemas" element={<ListaSistemas />} />
+              <Route path="sistemas/novo" element={<CadastroSistema />} />
+              <Route path="sistemas/editar/:id" element={<CadastroSistema />} />
+              <Route path="usuarios" element={<DashboardUsuarios />} />
+              <Route path="usuarios/novo" element={<CadastroUsuario />} />
+              <Route path="usuarios/editar/:id" element={<CadastroUsuario />} />
+              <Route path="/configuracoes" element={<Configuracoes />} />
+              <Route path="*" element={<Login />} />           
+            </Route>
+          </Routes>
+        </Router>
+      </ThemeProvider>
+    </AuthProvider>
   );
 }
 

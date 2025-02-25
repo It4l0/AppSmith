@@ -3,7 +3,7 @@
   min-height: 100vh;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #1976d2 0%, #9c27b0 100%);
+  background: var(--background-gradient);
   padding: 16px;
 }
 
@@ -11,11 +11,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.95) !important;
+  background-color: var(--paper-background-color) !important;
   backdrop-filter: blur(10px);
   padding: 24px;
   border-radius: 16px !important;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+  color: var(--text-color);
 }
 
 .logoContainer {
@@ -28,7 +29,7 @@
 
 .title {
   font-weight: 700 !important;
-  color: #1976d2;
+  color: var(--primary-color);
   letter-spacing: -0.5px;
   margin-bottom: 8px !important;
 }
@@ -44,7 +45,7 @@
   text-transform: none !important;
   font-size: 1rem !important;
   border-radius: 8px !important;
-  background: linear-gradient(45deg, #1976d2 30%, #1565c0 90%) !important;
+  background: var(--button-gradient) !important;
   transition: all 0.3s ease !important;
 }
 
@@ -68,4 +69,12 @@
   .title {
     font-size: 24px !important;
   }
+}
+
+:root {
+  --background-gradient: linear-gradient(135deg, #121212 0%, #333333 100%);
+  --paper-background-color: rgba(18, 18, 18, 0.95);
+  --text-color: #ffffff;
+  --primary-color: #bb86fc;
+  --button-gradient: linear-gradient(45deg, #bb86fc 30%, #3700b3 90%);
 }

@@ -57,7 +57,7 @@ const Login = () => {
 
   const handleDirectAccess = () => {
     bypassAuth();
-    navigate('/');
+    navigate('/dashboard');
   };
 
   return (
